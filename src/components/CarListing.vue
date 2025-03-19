@@ -1,12 +1,16 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Car } from '@/models/Car.js';
 import { carsService } from '@/services/CarsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
+import { computed } from 'vue';
 
 defineProps({
   carProp: { type: Car, required: true }
 })
+
+const account = computed(() => AppState.account)
 
 async function deleteCar(carId) {
   try {
@@ -44,7 +48,10 @@ async function deleteCar(carId) {
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <button @click="deleteCar(carProp.id)" class="btn btn-outline-danger" type="button">
+            <!-- <button v-if="account && carProp.creatorId == account?.id" @click="deleteCar(carProp.id)" -->
+            <!-- NOTE elvis operator (?) evaluates if a property is null/undefined before drilling into it -->
+            <button v-if="carProp.creatorId == account?.id" @click="deleteCar(carProp.id)"
+              class="btn btn-outline-danger" type="button">
               Delete Car
             </button>
           </div>
