@@ -30,13 +30,7 @@ watch(theme, () => {
       </button>
       <!-- collapsing menu -->
       <div class="collapse navbar-collapse " id="navbar-links">
-        <ul class="navbar-nav">
-          <li>
-            <RouterLink :to="{ name: 'About' }" class="btn text-green selectable">
-              About
-            </RouterLink>
-          </li>
-        </ul>
+        <ul class="navbar-nav"></ul>
         <!-- LOGIN COMPONENT HERE -->
         <div class="ms-auto">
           <button class="btn text-light" @click="toggleTheme"
