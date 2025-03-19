@@ -1,8 +1,12 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { House } from '@/models/House.js';
 import { houseService } from '@/services/HouseService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
+import { computed } from 'vue';
+
+const account = computed(()=> AppState.account)
 
 defineProps({
   houseProp: {type: House, required: true}
@@ -45,9 +49,9 @@ async function deleteHouse(houseId) {
         </div>
         <div class="d-flex align-items-center gap-3 justify-content-between px-2">
           <div>
-            <button @click="deleteHouse(houseProp.id)" class="btn btn-outline-danger">Delete</button>
+            <button v-if="houseProp.creatorId == account?.id" @click="deleteHouse(houseProp.id)" class="btn btn-outline-danger" type="button">Delete</button>
           </div>
-          <div class="d-flex align-items-center gap-3">
+          <div  class="d-flex align-items-center gap-3">
             <div>{{ houseProp.creator.name }}</div>
             <img class="creatorPic" :src="houseProp.creator.picture" alt="">
           </div>

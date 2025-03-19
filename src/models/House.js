@@ -11,5 +11,6 @@ export class House {
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt
     this.creator = data.creator
+    this.creatorId = data.creatorId
   }
 }
