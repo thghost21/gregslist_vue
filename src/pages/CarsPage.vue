@@ -8,6 +8,7 @@ onMounted(() => {
   getCars()
 })
 
+
 async function getCars() {
   try {
     await carsService.getCars()
