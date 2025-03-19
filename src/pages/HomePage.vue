@@ -19,11 +19,14 @@
             <span class="mdi mdi-vuejs text-vue"></span>
           </h1>
           <div class="d-flex justify-content-center align-items-center gap-4">
-            <button class="btn btn-outline-vue fs-2">
-              Cars
-            </button>
-            <button class="btn btn-outline-vue fs-2">
-              Jobs
+            <!-- NOTE ⚠️ code small test small ESPECIALLY when using router links-->
+            <RouterLink :to="{ name: 'Cars' }">
+              <button class="btn btn-outline-vue fs-2" type="button">
+                Cars
+              </button>
+            </RouterLink>
+            <button class="btn btn-outline-vue fs-2" type="button">
+              Houses
             </button>
           </div>
         </div>
