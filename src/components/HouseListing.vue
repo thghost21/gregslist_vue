@@ -45,6 +45,7 @@ async function deleteHouse(houseId) {
           <hr>
           <p class="fs-4">${{ houseProp.price.toLocaleString()}}</p>
           <p>{{ houseProp.levels }} Story</p>
+          <p>listed on {{ houseProp.createdAt.toLocaleDateString() }} </p>
           <p>{{ houseProp.description }}</p>
         </div>
         <div class="d-flex align-items-center gap-3 justify-content-between px-2">
