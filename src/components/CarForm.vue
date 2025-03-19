@@ -25,25 +25,27 @@
       <label for="carImgUrl">Car Image URL</label>
       <input id="carImgUrl" name="imgUrl" type="url" required maxlength="500" placeholder="Image URL...">
     </div>
-    <div class="mb-3">
-      <label for="carEngineType">Car Engine Type</label>
-      <select name="engineType" id="carEngineType">
-        <option value="unknown">Unknown</option>
-        <option value="2 stroke">2 Stroke</option>
-        <option value="4 cylinder">4 cylinder</option>
-        <option value="v6">v6</option>
-        <option value="v8">v8</option>
-        <option value="v10">v10</option>
-        <option value="v12">v12</option>
-        <option value="small">small</option>
-        <option value="medium">medium</option>
-        <option value="large">large</option>
-        <option value="chuncko">chuncko</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="carColor">Car Color</label>
-      <input id="carColor" name="color" type="color" value="#FF0000" class="check-input">
+    <div class="d-flex justify-content-between">
+      <div class="mb-3">
+        <label for="carEngineType">Car Engine Type</label>
+        <select name="engineType" id="carEngineType">
+          <option value="unknown">Unknown</option>
+          <option value="2 stroke">2 Stroke</option>
+          <option value="4 cylinder">4 cylinder</option>
+          <option value="v6">v6</option>
+          <option value="v8">v8</option>
+          <option value="v10">v10</option>
+          <option value="v12">v12</option>
+          <option value="small">small</option>
+          <option value="medium">medium</option>
+          <option value="large">large</option>
+          <option value="chuncko">chuncko</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="carColor">Car Color</label>
+        <input id="carColor" name="color" type="color" value="#FF0000" class="check-input">
+      </div>
     </div>
     <div class="mb-3">
       <label for="carDescription">Car Description</label>
@@ -62,4 +64,12 @@
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+}
+</style>
