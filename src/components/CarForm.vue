@@ -20,6 +20,16 @@ async function createCar() {
     // NOTE make sure use .value!!!!
     const carData = editableCarData.value
     await carsService.createCar(carData)
+    editableCarData.value = {
+      make: '',
+      model: '',
+      price: 0,
+      year: 1886,
+      imgUrl: '',
+      engineType: 'unknown',
+      color: '#000000',
+      description: ''
+    }
   } catch (error) {
     Pop.error(error, 'Could not create car')
     logger.error('COULD NOT CREATE CAR', error)
