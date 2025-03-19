@@ -1,9 +1,20 @@
 <script setup>
 import { House } from '@/models/House.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
 
 defineProps({
   houseProp: {type: House, required: true}
 })
+
+async function deleteHouse(houseId) {
+  try {
+    logger.log("deleting house with the id of ", houseId)
+  }
+  catch (error){
+    Pop.error(error);
+  }
+}
 </script>
 
 
@@ -22,11 +33,12 @@ defineProps({
           <h4>{{ houseProp.bedrooms }} bed / {{ houseProp.bathrooms }} bath</h4>
           <hr>
           <p class="fs-4">${{ houseProp.price.toLocaleString()}}</p>
+          <p>{{ houseProp.levels }} Story</p>
           <p>{{ houseProp.description }}</p>
         </div>
         <div class="d-flex align-items-center gap-3 justify-content-between px-2">
           <div>
-            <button class="btn btn-outline-danger">Delete</button>
+            <button @click="deleteHouse(houseProp.id)" class="btn btn-outline-danger">Delete</button>
           </div>
           <div class="d-flex align-items-center gap-3">
             <div>{{ houseProp.creator.name }}</div>
