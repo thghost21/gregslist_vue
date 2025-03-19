@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import JobForm from '@/components/JobForm.vue';
 import JobsListing from '@/components/JobsListing.vue';
 import { jobsService } from '@/services/JobsService.js';
 import { logger } from '@/utils/Logger.js';
@@ -36,7 +37,7 @@ async function getJobs(){
       </div>
       <div class="row">
         <div class="col-md-6 ">
-          
+          <JobForm />
         </div>
         <div class="col-md-6">
           <div class="text-center">
