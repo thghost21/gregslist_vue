@@ -1,34 +1,65 @@
 <script setup>
+import { carsService } from '@/services/CarsService.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
+import { ref } from 'vue';
+
+const editableCarData = ref({
+  make: '',
+  model: '',
+  price: 0,
+  year: 1886,
+  imgUrl: '',
+  engineType: 'unknown',
+  color: '#000000',
+  description: ''
+})
+
+async function createCar() {
+  try {
+    // NOTE make sure use .value!!!!
+    const carData = editableCarData.value
+    await carsService.createCar(carData)
+  } catch (error) {
+    Pop.error(error, 'Could not create car')
+    logger.error('COULD NOT CREATE CAR', error)
+  }
+}
 
 </script>
 
 
 <template>
-  <form onsubmit="app.carsController.createCarListing()">
+  <form @submit.prevent="createCar()">
     <div class="mb-3">
       <label for="carMake">Car Make</label>
-      <input id="carMake" name="make" type="text" required maxlength="500" placeholder="Car Make...">
+      <input v-model="editableCarData.make" id="carMake" name="make" type="text" required maxlength="500"
+        placeholder="Car Make...">
     </div>
     <div class="mb-3">
       <label for="carModel">Car Model</label>
-      <input id="carModel" name="model" type="text" required maxlength="500" placeholder="Car Model...">
+      <input v-model="editableCarData.model" id="carModel" name="model" type="text" required maxlength="500"
+        placeholder="Car Model...">
     </div>
     <div class="mb-3">
       <label for="carPrice">Car Price</label>
-      <input id="carPrice" name="price" type="number" required min="0" max="1000000" placeholder="0">
+      <input v-model="editableCarData.price" id="carPrice" name="price" type="number" required min="0" max="1000000"
+        placeholder="0">
     </div>
     <div class="mb-3">
       <label for="carYear">Car Year</label>
-      <input id="carYear" name="year" type="number" required min="1886" max="2025" placeholder="2025">
+      <input v-model="editableCarData.year" id="carYear" name="year" type="number" required min="1886" max="2025"
+        placeholder="2025">
     </div>
     <div class="mb-3">
       <label for="carImgUrl">Car Image URL</label>
-      <input id="carImgUrl" name="imgUrl" type="url" required maxlength="500" placeholder="Image URL...">
+      <input v-model="editableCarData.imgUrl" id="carImgUrl" name="imgUrl" type="url" required maxlength="500"
+        placeholder="Image URL...">
     </div>
     <div class="d-flex justify-content-between">
       <div class="mb-3">
         <label for="carEngineType">Car Engine Type</label>
-        <select name="engineType" id="carEngineType">
+        <select v-model="editableCarData.engineType" name="engineType" id="carEngineType">
           <option value="unknown">Unknown</option>
           <option value="2 stroke">2 Stroke</option>
           <option value="4 cylinder">4 cylinder</option>
@@ -44,13 +75,14 @@
       </div>
       <div class="mb-3">
         <label for="carColor">Car Color</label>
-        <input id="carColor" name="color" type="color" value="#FF0000" class="check-input">
+        <input v-model="editableCarData.color" id="carColor" name="color" type="color" value="#FF0000"
+          class="check-input">
       </div>
     </div>
     <div class="mb-3">
       <label for="carDescription">Car Description</label>
-      <textarea name="description" id="carDescription" class="w-100" placeholder="Description of the car..."
-        maxlength="500"></textarea>
+      <textarea v-model="editableCarData.description" name="description" id="carDescription" class="w-100"
+        placeholder="Description of the car..." maxlength="500"></textarea>
     </div>
     <div class="text-end">
       <button class="btn btn-outline-danger me-2" type="reset">
