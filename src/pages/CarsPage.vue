@@ -8,6 +8,7 @@ import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 
 const cars = computed(() => AppState.cars)
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   getCars()
@@ -34,7 +35,8 @@ async function getCars() {
       </div>
     </div>
   </section>
-  <section class="container">
+  <!-- NOTE will only show this container if the user is logged in (there is an account object in the appstate) -->
+  <section v-if="account" class="container">
     <div class="row align-items-center">
       <div class="col-md-6">
         <CarForm />
@@ -47,6 +49,9 @@ async function getCars() {
         </div>
       </div>
     </div>
+  </section>
+  <section v-else>
+    <h2 class="text-center">Please log in to list a car!</h2>
   </section>
   <section class="container">
     <div class="row">
