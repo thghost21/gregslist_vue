@@ -18,6 +18,12 @@ class CarsService {
     const car = new Car(response.data)
     AppState.cars.push(car)
   }
+
+  async deleteCar(carId) {
+    const response = await api.delete(`api/cars/${carId}`)
+    logger.log('DELETED CAR!', response.data)
+  }
+
 }
 
 export const carsService = new CarsService()
