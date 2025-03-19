@@ -1,5 +1,6 @@
 <script setup>
 import { House } from '@/models/House.js';
+import { houseService } from '@/services/HouseService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 
@@ -9,10 +10,16 @@ defineProps({
 
 async function deleteHouse(houseId) {
   try {
+    const confirmed = await Pop.confirm('Are you sure you would like to delete this house?', 'This house will be gone forever', 'Proceed', 'Never mind')
+    if (!confirmed) {
+      return
+    }
     logger.log("deleting house with the id of ", houseId)
+    await houseService.deleteHouse(houseId)
   }
   catch (error){
-    Pop.error(error);
+    Pop.error(error,'could not delete house');
+    logger.log('could not delete house', error)
   }
 }
 </script>
